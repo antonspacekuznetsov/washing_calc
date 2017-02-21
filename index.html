@@ -3,7 +3,7 @@
   <style>
     .tooltip2 {
       position: fixed;
-      padding: 10px 20px;
+      padding: 10px 0px;
       /* красивости... */
 	  z-index:9999;
       border: 1px solid #b3c9ce;
@@ -181,11 +181,15 @@
 <h3>Стоимость уборки:</h3>
 </div>
 <div class="col-md-1" style="margin-top:7px;">
-<h1><b>&#8381;</b></h1>
+<h1 id="price"><b>&#8381;</b></h1>
 </div>
 </div>
 
 <script>
+for (var i=0;i<16;i++)
+{
+	document.getElementById("wa"+(i+1)).setAttribute("onkeydown", "if (event.keyCode >0) return false");
+}
 $(".liner").width(($(".col-md-2").width()*5+25)+"px");
 jQuery(function($){
    $("#usrPhone").mask("+7 (999) 999-9999");
@@ -214,6 +218,11 @@ washer = {
 	},
 	prices:
 	{
+		totalCost:0,
+		sanUzel:540,
+		prihojaya:450,
+		room:450,
+		S:51,
 		radioButton: 2970,
 		
 		inFridge:360,
@@ -307,14 +316,14 @@ washer = {
 				}
 				if (action == '+')
 				{
-						if($("#wa"+number).val() > 10)
+						if($("#wa"+number).val() > 1)
 								return;
 
 					$("#wa"+number).val(Number($("#wa"+number).val()) + this.action.hallway);
 					
-					if($("#wa"+number).val() > 10)
+					if($("#wa"+number).val() > 1)
 					{
-						$("#wa"+number).val(10);
+						$("#wa"+number).val(1);
 					}
 				}
 			break;
@@ -381,14 +390,14 @@ washer = {
 				}
 				if (action == '+')
 				{
-						if($("#wa"+number).val() > 10)
+						if($("#wa"+number).val() > 2)
 								return;
 
 					$("#wa"+number).val(Number($("#wa"+number).val()) + this.action.hallway);
 					
-					if($("#wa"+number).val() > 10)
+					if($("#wa"+number).val() > 2)
 					{
-						$("#wa"+number).val(10);
+						$("#wa"+number).val(2);
 					}
 				}
 			break;
@@ -456,6 +465,45 @@ washer = {
 			return;
 		}
 		
+		this.prices.totalCost = 0;
+		
+		if ($("#wa1").val() == 20 && $("#wa4").val() == 1 && $("#wa5").val() == 1)
+			this.prices.totalCost = 1780;
+		else
+		{
+			if ($("#wa1").val() == 20 && $("#wa4").val() > 1)
+			{
+				this.prices.totalCost = $("#wa4").val() * 35 * this.prices.S;
+			}
+			if ($("#wa1").val() > 20)
+			{
+				this.prices.totalCost = 1780 + (($("#wa1").val() - 20) * this.prices.S);
+			}
+		}
+		
+		if ($("#wa2").val() == 1)
+		{
+			this.prices.totalCost += this.prices.prihojaya;
+		}
+		
+		if (document.getElementById("wa3").alt == "1" || document.getElementById("wa6").alt == "1")
+		{
+			this.prices.totalCost += this.prices.radioButton;
+		}
+		
+
+			this.prices.totalCost += $("#wa7").val() * this.prices.inFridge;
+			this.prices.totalCost += $("#wa8").val() * this.prices.inOven;
+			this.prices.totalCost += $("#wa9").val() * this.prices.inMicrowave;
+			this.prices.totalCost += $("#wa10").val() * this.prices.washKitchenCabinet;
+			this.prices.totalCost += $("#wa11").val() * this.prices.washKettle;
+			this.prices.totalCost += $("#wa12").val() * this.prices.washDishes;
+			this.prices.totalCost += $("#wa13").val() * this.prices.cleanBalcony;
+			this.prices.totalCost += $("#wa14").val() * this.prices.washRoomsCabinet;
+			this.prices.totalCost += $("#wa15").val() * this.prices.washWindows;
+			this.prices.totalCost += $("#wa16").val() * this.prices.washMirrors;	
+
+			document.getElementById("price").innerHTML = "<b>"+this.prices.totalCost+"&#8381;</b>";
 	}
 
 }
