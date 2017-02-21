@@ -70,11 +70,11 @@
   </div>
 </div>
 <br>
- <h4>Дополнительно<img id="wa6" src="arrow.png"  class="img-thumbnail" style="margin-left:5px;cursor: pointer;width:23px;height:19px;" onclick="washer.minimize();"></h4>
+ <h4>Дополнительно<img id="arrow" src="arrow.png"  class="img-thumbnail" style="margin-left:5px;cursor: pointer;width:23px;height:19px;" onclick="washer.minimize();"></h4>
  <div id="adder">
  <div class="liner" style="margin-left:10px;height:1px; width:100%; border:1px solid gray;margin-bottom:15px;"></div>
-<div id="extrablock" class="row" style="margin-left:10px;">
-  <div class="col-md-2" style="height:163px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Внутри<br>холодильника</p>
+<div id="extrablock" class="row" style="margin-left:3px;">
+  <div class="col-md-2" style="height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Внутри<br>холодильника</p>
   <p style="text-align:center;"><img src="img/1.png"></p>
   <span data-tooltip="Очистка внутренних поверхностей<br>холодильников и морозильных камер" class="glyphicon glyphicon-question-sign" style="position:absolute;right:0px;"></span>
   <div class="input-group" style="position:absolute;bottom:0px;">
@@ -82,7 +82,7 @@
     <input id="wa7" type="text" class="form-control"  style="padding-left:50%;" value="0">
     <span class="input-group-addon" style="cursor: pointer;background-color:ffeb3b;" onclick="washer.setValue('+', 7);"><b>+</b></span>
   </div></div>
-  <div class="col-md-2" style="height:163px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Внутри<br>духовки</p>
+  <div class="col-md-2" style="height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Внутри<br>духовки</p>
   <p style="text-align:center;"><img src="img/2.png"></p>
   <span data-tooltip="Очистка и удаление жира с внутренней<br>поверхности духового шкафа" class="glyphicon glyphicon-question-sign" style="position:absolute;right:0px;"></span>
   <div class="input-group" style="position:absolute;bottom:0px;">
@@ -200,7 +200,7 @@ window.onresize = function(e)
 	    {
 			if ($(window).width() < 997)
 			{
-				$("#calcblock").width("100%");
+				$("#calcblock").width("97%");
 				
 				//$("#ch1").css("margin-left", ($("#calcblock").width()/2-$("#ch1").width()/2)+"px");
 				}
@@ -238,10 +238,21 @@ washer = {
 		washWindows:400,
 		washMirrors:100
 	},
+	priznak:true,
 	minimize: function()
 	{
 			$("#adder").slideToggle("slow");
 			$(this).toggleClass("active");
+			if (this.priznak)
+			{
+				this.priznak=false;
+				document.getElementById("arrow").setAttribute("src", "arrow2.png");
+			}
+			else
+			{
+				this.priznak=true;
+				document.getElementById("arrow").setAttribute("src", "arrow.png");
+			}
 
 	},
 	setValue: function(action, number)
