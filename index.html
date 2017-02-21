@@ -25,7 +25,7 @@
 <body>
 
 
-  <div id="calcblock" style="width:70%;">
+  <div id="calcblock" style="margin:0 auto;width:1040px;">
   <div class="row" >
   <div class="col-md-4">
  
@@ -70,7 +70,8 @@
   </div>
 </div>
 <br>
- <h4>Дополнительно</h4>
+ <h4>Дополнительно<img id="wa6" src="arrow.png"  class="img-thumbnail" style="margin-left:5px;cursor: pointer;width:23px;height:19px;" onclick="washer.minimize();"></h4>
+ <div id="adder">
  <div class="liner" style="margin-left:10px;height:1px; width:100%; border:1px solid gray;margin-bottom:15px;"></div>
 <div id="extrablock" class="row" style="margin-left:10px;">
   <div class="col-md-2" style="height:163px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Внутри<br>холодильника</p>
@@ -154,6 +155,7 @@
   </div></div>
 </div>
  <div class="liner" style="margin-left:10px;height:1px; width:100%; border:1px solid gray;margin-top:25px;"></div>
+ </div>
 <br>
 
 <div class="row" style="margin-left:10px;">
@@ -204,7 +206,7 @@ window.onresize = function(e)
 				}
 			else
 			{
-				$("#calcblock").width("70%");
+				$("#calcblock").width("1040px");
 				}
 				
 		    $(".liner").width(($(".col-md-2").width()*5+25)+"px");
@@ -236,7 +238,12 @@ washer = {
 		washWindows:400,
 		washMirrors:100
 	},
+	minimize: function()
+	{
+			$("#adder").slideToggle("slow");
+			$(this).toggleClass("active");
 
+	},
 	setValue: function(action, number)
 	{
 		if (number>=7 && number<=16)
