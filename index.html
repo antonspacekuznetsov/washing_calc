@@ -3,7 +3,7 @@
   <style>
     .tooltip2 {
       position: fixed;
-      padding: 10px 0px;
+      padding: 10px 20px;
       /* красивости... */
 	  z-index:9999;
       border: 1px solid #b3c9ce;
@@ -11,7 +11,7 @@
       text-align: center;
       font: italic 14px/1.3 arial, sans-serif;
       color: #333;
-      background: #fff;
+      background: #FFFAD1;
       box-shadow: 3px 3px 3px rgba(0, 0, 0, .3);
     }
   </style>
@@ -42,9 +42,11 @@
     <input id="wa2" type="text" class="form-control"  style="padding-left:50%;" value="0">
     <span class="input-group-addon" style="cursor: pointer;background-color:ffeb3b;" onclick="washer.setValue('+', 2);"><span class="glyphicon glyphicon-plus"></span></span>
   </div></div>
-  <div id="ch1" class="col-md-4"> 
+  <div id="inner">
+  <div id="ch1" class="col-md-4" style="margin:0 auto;width:218px;"> 
     <div style="margin-top:40px;" onclick="washer.setValue('-', 3);"><img id="wa3" alt="1" src="color.png" alt="..." class="img-thumbnail" style="cursor: pointer;width:34px;height:34px;float:left;"><h4 style="padding-top:6px; padding-left:45px;"> Генеральная</h4></div>
-    
+    </div>
+	
   </div>
 </div>
 
@@ -64,17 +66,20 @@
     <input id="wa5" type="text" class="form-control"  style="padding-left:50%;" value="1">
     <span class="input-group-addon" style="cursor: pointer;background-color:ffeb3b;" onclick="washer.setValue('+', 5);"><span class="glyphicon glyphicon-plus"></span></span>
   </div></div>
-  <div id="ch2" class="col-md-4"> 
+  <div id="outer">
+  <div id="ch2" class="col-md-4" style="margin:0 auto;width:220px;"> 
     <div style="margin-top:40px;" onclick="washer.setValue('-', 6);"><img id="wa6" src="color2.png" alt="0"  class="img-thumbnail" style="cursor: pointer;width:34px;height:34px;float:left;"><h4 style="padding-top:6px; padding-left:45px;"> После ремонта</h4></div>
-    
+  </div>
   </div>
 </div>
 <br>
+<div id="dop">
  <h4>Дополнительно<img id="arrow" src="arrow.png"  class="img-thumbnail" style="margin-left:5px;cursor: pointer;width:23px;height:19px;" onclick="washer.minimize();"></h4>
+ </div>
  <div id="adder">
  <div class="liner" style="margin-left:5;height:1px; width:100%; border:1px solid gray;margin-bottom:15px;"></div>
-<div id="extrablock" class="row" style="margin-left:3px;">
-  <div class="col-md-2" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Внутри<br>холодильника</p>
+<div id="extrablock" class="row" style="margin-left:2px;">
+  <div class="col-md-2 myblock" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Внутри<br>холодильника</p>
   <p style="text-align:center;"><img src="img/1.png"></p>
   <span data-tooltip="Очистка внутренних поверхностей<br>холодильников и морозильных камер" class="glyphicon glyphicon-question-sign" style="position:absolute;right:0px;"></span>
   <div class="input-group" style="position:absolute;bottom:0px;">
@@ -82,7 +87,7 @@
     <input id="wa7" type="text" class="form-control"  style="padding-left:50%;" value="0">
     <span class="input-group-addon" style="cursor: pointer;background-color:ffeb3b;" onclick="washer.setValue('+', 7);"><b>+</b></span>
   </div></div>
-  <div class="col-md-2" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Внутри<br>духовки</p>
+  <div class="col-md-2 myblock" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Внутри<br>духовки</p>
   <p style="text-align:center;"><img src="img/2.png"></p>
   <span data-tooltip="Очистка и удаление жира с внутренней<br>поверхности духового шкафа" class="glyphicon glyphicon-question-sign" style="position:absolute;right:0px;"></span>
   <div class="input-group" style="position:absolute;bottom:0px;">
@@ -90,7 +95,7 @@
     <input id="wa8" type="text" class="form-control"  style="padding-left:50%;" value="0">
     <span class="input-group-addon" style="cursor: pointer;background-color:ffeb3b;" onclick="washer.setValue('+', 8);"><b>+</b></span>
   </div></div>
-  <div class="col-md-2" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Внутри<br>микроволновки</p>
+  <div class="col-md-2 myblock" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Внутри<br>микроволновки</p>
   <p style="text-align:center;"><img style="margin-top:10px;" src="img/3.png"></p>
   <span data-tooltip="Очистка и удаление жира из<br>микроволновой печи" class="glyphicon glyphicon-question-sign" style="position:absolute;right:0px;"></span>
   <div class="input-group" style="position:absolute;bottom:0px;">
@@ -98,7 +103,7 @@
     <input id="wa9" type="text" class="form-control"  style="padding-left:50%;" value="0">
     <span class="input-group-addon" style="cursor: pointer;background-color:ffeb3b;" onclick="washer.setValue('+', 9);"><b>+</b></span>
   </div></div>
-  <div class="col-md-2" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Помыть<br>кухонные шкафы</p>
+  <div class="col-md-2 myblock" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Помыть<br>кухонные шкафы</p>
   <p style="text-align:center;"><img src="img/4.png"></p>
   <span data-tooltip="Протирка и уборка в кухонных шкафах" class="glyphicon glyphicon-question-sign" style="position:absolute;right:0px;"></span>
   <div class="input-group" style="position:absolute;bottom:0px;">
@@ -106,7 +111,7 @@
     <input id="wa10" type="text" class="form-control"  style="padding-left:50%;" value="0">
     <span class="input-group-addon" style="cursor: pointer;background-color:ffeb3b;" onclick="washer.setValue('+', 10);"><b>+</b></span>
   </div></div>
-  <div class="col-md-2" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Помыть<br>чайник от накипи</p>
+  <div class="col-md-2 myblock" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Помыть<br>чайник от накипи</p>
   <p style="text-align:center;"><img src="img/5.png"></p>
   <span class="glyphicon glyphicon-question-sign" style="position:absolute;right:0px;"></span>
   <div class="input-group" style="position:absolute;bottom:0px;">
@@ -114,7 +119,7 @@
     <input id="wa11" type="text" class="form-control"  style="padding-left:50%;" value="0">
     <span class="input-group-addon" style="cursor: pointer;background-color:ffeb3b;" onclick="washer.setValue('+', 11);"><b>+</b></span>
   </div></div>
-  <div class="col-md-2" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Помыть<br>посуду</p>
+  <div class="col-md-2 myblock" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Помыть<br>посуду</p>
   <p style="text-align:center;"><img src="img/6.png"></p>
   <span class="glyphicon glyphicon-question-sign" style="position:absolute;right:0px;"></span>
   <div class="input-group" style="position:absolute;bottom:0px;">
@@ -122,7 +127,7 @@
     <input id="wa12" type="text" class="form-control"  style="padding-left:50%;" value="0">
     <span class="input-group-addon" style="cursor: pointer;background-color:ffeb3b;" onclick="washer.setValue('+', 12);"><b>+</b></span>
   </div></div>
-  <div class="col-md-2" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Убраться<br>на балконе</p>
+  <div class="col-md-2 myblock" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Убраться<br>на балконе</p>
   <p style="text-align:center;"><img src="img/7.png"></p>
   <span data-tooltip="Протирка всех доступных поверхностей<br>на балконе, кроме окон" class="glyphicon glyphicon-question-sign" style="position:absolute;right:0px;"></span>
   <div class="input-group" style="position:absolute;bottom:0px;">
@@ -130,7 +135,7 @@
     <input id="wa13" type="text" class="form-control"  style="padding-left:50%;" value="0">
     <span class="input-group-addon" style="cursor: pointer;background-color:ffeb3b;" onclick="washer.setValue('+', 13);"><b>+</b></span>
   </div></div>
-  <div class="col-md-2" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Помыть<br>комнатные шкафы</p>
+  <div class="col-md-2 myblock" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Помыть<br>комнатные шкафы</p>
   <p style="text-align:center;"><img src="img/8.png"></p>
   <span class="glyphicon glyphicon-question-sign" style="position:absolute;right:0px;"></span>
   <div class="input-group" style="position:absolute;bottom:0px;">
@@ -138,7 +143,7 @@
     <input id="wa14" type="text" class="form-control"  style="padding-left:50%;" value="0">
     <span class="input-group-addon" style="cursor: pointer;background-color:ffeb3b;" onclick="washer.setValue('+', 14);"><b>+</b></span>
   </div></div>
-  <div class="col-md-2" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Помыть<br>окна</p>
+  <div class="col-md-2 myblock" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Помыть<br>окна</p>
   <p style="text-align:center;"><img src="img/9.png"></p>
   <span data-tooltip="Мытье окон 3м&sup2; (в зимнее время с 1 ноября<br>по 31 марта только с внутренней стороны)" class="glyphicon glyphicon-question-sign" style="position:absolute;right:0px;"></span>
   <div class="input-group" style="position:absolute;bottom:0px;">
@@ -146,7 +151,7 @@
     <input id="wa15" type="text" class="form-control"  style="padding-left:50%;" value="0">
     <span class="input-group-addon" style="cursor: pointer;background-color:ffeb3b;" onclick="washer.setValue('+', 15);"><b>+</b></span>
   </div></div>
-  <div class="col-md-2" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Помыть<br>зеркала</p>
+  <div class="col-md-2 myblock" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Помыть<br>зеркала</p>
   <p style="text-align:center;"><img src="img/10.png"></p>
   <span class="glyphicon glyphicon-question-sign" style="position:absolute;right:0px;"></span><div class="input-group" style="position:absolute;bottom:0px;">
     <span class="input-group-addon" style="cursor: pointer;" onclick="washer.setValue('-', 16);"><b>&mdash;</b></span>
@@ -158,7 +163,7 @@
  </div>
 <br>
 
-<div class="row" style="margin-left:10px;">
+<div class="row" style="">
 <div class="col-md-2">
 <div class="control-group error">
   <h4>Ваше имя<span style="color:red;">*</span></h4>
@@ -172,17 +177,17 @@
 </div>
 </div>
 <div class="col-md-3" style="margin-top:7px;">
-<div style="width:305px;height:60px;background-color:#ffeb3b;border-radius:4px;cursor:pointer;" onclick="washer.calc();">
+<div style="margin:0 auto;width:305px;height:60px;background-color:#ffeb3b;border-radius:4px;cursor:pointer;" onclick="washer.calc();">
 <h2 style="text-align:center;padding-top:15px;white-space: nowrap;"><b>Узнать стоимость</b></h2>
 </div>
 </div>
 </div>
 
 <div class="row" style="margin-left:10px;">
-<div class="col-md-2" style="margin-top:16px;width:250px;">
+<div class="col-md-2" style="margin:0 auto;margin-top:16px;width:250px;">
 <h3>Стоимость уборки:</h3>
 </div>
-<div class="col-md-1" style="margin-top:7px;">
+<div class="col-md-2" style="margin:0 auto;margin-top:7px;width:250px;">
 <h1 id="price"><b>&#8381;</b></h1>
 </div>
 </div>
@@ -200,16 +205,30 @@ window.onresize = function(e)
 	    {
 			if ($(window).width() < 997)
 			{
+				washer.changeButtons(1);
 				$("#calcblock").width("97%");
-				
 				//$("#ch1").css("margin-left", ($("#calcblock").width()/2-$("#ch1").width()/2)+"px");
+				$("#dop").css({"width:":"100%", "background-color":"ffeb3b", "margin":"0px", "height":"40px","padding-top":"1px","margin-left":"-15px", "margin-right":"-15px","padding-left":"15px"});
 				}
 			else
 			{
+				washer.changeButtons(2);
 				$("#calcblock").width("1040px");
+				$("#dop").css({"width:":"", "background-color":"", "margin":"", "height":"","padding-top":"","margin-left":"", "margin-right":"","padding-left":"15px"});
 				}
 				
 		    $(".liner").width(($(".col-md-2").width()*5+25)+"px");
+			
+			if ($(window).width() < 370)
+				{
+					$(".myblock").width("93%");
+					$(".myblock").css({"margin-right": "20px;"});
+				}
+			else
+			{
+				$(".myblock").width("176px");
+				$(".myblock").css({"margin-right": "0px;"});
+			}
 	    }
 		
 washer = {
@@ -239,6 +258,9 @@ washer = {
 		washMirrors:100
 	},
 	priznak:true,
+	innerhtml:null,
+	outerhtml:null,
+	changeW:false,
 	minimize: function()
 	{
 			$("#adder").slideToggle("slow");
@@ -254,6 +276,32 @@ washer = {
 				document.getElementById("arrow").setAttribute("src", "arrow.png");
 			}
 
+	},
+	changeButtons: function(action)
+	{
+		switch(action)
+		{
+			case 1:
+			if (!this.changeW)
+			{
+				this.innerhtml = document.getElementById("inner").innerHTML;
+				this.outerhtml = document.getElementById("outer").innerHTML;
+				document.getElementById("inner").children[0].remove();
+				document.getElementById("outer").innerHTML = this.outerhtml + this.innerhtml;
+				this.changeW=true;
+				}
+			break;
+			
+			case 2:
+			if (this.changeW)
+			{
+				document.getElementById("inner").innerHTML = this.innerhtml;
+				document.getElementById("outer").innerHTML =this.outerhtml;
+				this.changeW=false;
+				}
+			break;
+		
+		}
 	},
 	setValue: function(action, number)
 	{
@@ -545,10 +593,10 @@ washer = {
 
       var coords = target.getBoundingClientRect();
 
-      var left = coords.left + (target.offsetWidth - tooltipElem.offsetWidth) / 2;
+      var left = coords.left +20;
       if (left < 0) left = 0; // не вылезать за левую границу окна
 
-      var top = coords.top - tooltipElem.offsetHeight - 5;
+      var top = coords.top - tooltipElem.offsetHeight + 30;
       if (top < 0) { // не вылезать за верхнюю границу окна
         top = coords.top + target.offsetHeight + 5;
       }
