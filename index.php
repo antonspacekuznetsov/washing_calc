@@ -1,10 +1,37 @@
+<?php
+include_once ('safemysql.class.php');
+$elements = array (
+	"defaultprice"=>"Р¦РµРЅР° Р·Р° СЃС‚Р°РЅРґР°СЂС‚РЅС‹Р№ РІС‹Р±РѕСЂ", 
+	"sanUzel" => "Р¦РµРЅР° Р·Р° СЃР°РЅСѓР·РµР»",
+	"prihojaya" => "Р¦РµРЅР° Р·Р° РїСЂРёС…РѕР¶Р°СЋ",
+	"room" => "Р¦РµРЅР° Р·Р° РєРѕРјРЅР°С‚Сѓ",
+	"S" => "Р¦РµРЅР° Р·Р° 1 РєРІ. Рј.",
+	"radioButton" => "Р¦РµРЅР° Р·Р° РІРёРґ СѓР±РѕСЂРєРё (Р“РµРЅРµСЂР°Р»СЊРЅР°СЏ РёР»Рё РџРѕСЃР»Рµ СЂРµРјРѕРЅС‚Р°)",
+	"inFridge" => "Р¦РµРЅР° Р·Р° С…РѕР»РѕРґРёР»СЊРЅРёРє",
+	"inOven" => "Р¦РµРЅР° Р·Р° РґСѓС…РѕРІРєСѓ",
+	"inMicrowave" => "Р¦РµРЅР° Р·Р° РјРёРєСЂРѕРІРѕР»РЅРѕРІРєСѓ",
+	"washKitchenCabinet" => "Р¦РµРЅР° Р·Р° РєСѓС…РѕРЅРЅС‹Рµ С€РєР°С„С‹",
+	"washKettle" => "Р¦РµРЅР° Р·Р° С‡Р°Р№РЅРёРє",
+	"washDishes" => "Р¦РµРЅР° Р·Р° РїРѕСЃСѓРґСѓ",
+	"cleanBalcony" => "Р¦РµРЅР° Р·Р° Р±Р°Р»РєРѕРЅ",
+	"washRoomsCabinet" => "Р¦РµРЅР° Р·Р° РєРѕРјРЅР°С‚РЅС‹Рµ С€РєР°С„С‹",
+	"washWindows" => "Р¦РµРЅР° Р·Р° РѕРєРЅР°",
+	"washMirrors" => "Р¦РµРЅР° Р·Р° Р·РµСЂРєР°Р»Р°"
+);
+
+if (isset($_POST['write']))
+{
+	include_once("admin.php");
+}
+
+?>
 <html>
 <head> 
   <style>
     .tooltip2 {
       position: fixed;
       padding: 10px 20px;
-      /* красивости... */
+      /* РєСЂР°СЃРёРІРѕСЃС‚Рё... */
 	  z-index:9999;
       border: 1px solid #b3c9ce;
       border-radius: 4px;
@@ -23,20 +50,23 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script> 
 </head>
 <body>
-
+<?php
+if (isset($_GET['a']) && ($_GET['a'] == "admin"))
+	include_once("admin.php");
+?>
 
   <div id="calcblock" style="margin:0 auto;width:1040px;">
   <div class="row" >
   <div class="col-md-4">
  
-  <h4>Общая площадь м&sup2;</h4>
+  <h4>РћР±С‰Р°СЏ РїР»РѕС‰Р°РґСЊ Рј&sup2;</h4>
   <div class="input-group" >
     <span class="input-group-addon" style="cursor: pointer;" onclick="washer.setValue('-', 1);"><span class="glyphicon glyphicon-minus"></span></span>
     <input id="wa1" type="text" class="form-control"  style="padding-left:50%;" value="20">
     <span class="input-group-addon" style="cursor: pointer;background-color:ffeb3b;" onclick="washer.setValue('+', 1);"><span class="glyphicon glyphicon-plus"></span></span>
   </div></div>
   <div class="col-md-4">
-  <h4>Количество прихожих</h4>
+  <h4>РљРѕР»РёС‡РµСЃС‚РІРѕ РїСЂРёС…РѕР¶РёС…</h4>
   <div class="input-group" >
     <span class="input-group-addon" style="cursor: pointer;" onclick="washer.setValue('-', 2);"><span class="glyphicon glyphicon-minus"></span></span>
     <input id="wa2" type="text" class="form-control"  style="padding-left:50%;" value="0">
@@ -44,7 +74,7 @@
   </div></div>
   <div id="inner">
   <div id="ch1" class="col-md-4" style="margin:0 auto;width:218px;"> 
-    <div style="margin-top:40px;" onclick="washer.setValue('-', 3);"><img id="wa3" alt="1" src="color.png" alt="..." class="img-thumbnail" style="cursor: pointer;width:34px;height:34px;float:left;"><h4 style="padding-top:6px; padding-left:45px;"> Генеральная</h4></div>
+    <div style="margin-top:40px;" onclick="washer.setValue('-', 3);"><img id="wa3" alt="1" src="<?php echo "http://".$_SERVER['HTTP_HOST']."/whashing/"; ?>color.png" alt="..." class="img-thumbnail" style="cursor: pointer;width:34px;height:34px;float:left;"><h4 style="padding-top:6px; padding-left:45px;"> Р“РµРЅРµСЂР°Р»СЊРЅР°СЏ</h4></div>
     </div>
 	
   </div>
@@ -53,14 +83,14 @@
   <div class="row" >
   <div class="col-md-4">
  
-  <h4>Количество комнат</h4>
+  <h4>РљРѕР»РёС‡РµСЃС‚РІРѕ РєРѕРјРЅР°С‚</h4>
   <div class="input-group" >
     <span class="input-group-addon" style="cursor: pointer;" onclick="washer.setValue('-', 4);"><span class="glyphicon glyphicon-minus"></span></span>
     <input id="wa4" type="text" class="form-control"  style="padding-left:50%;" value="1">
     <span class="input-group-addon" style="cursor: pointer;background-color:ffeb3b;" onclick="washer.setValue('+', 4);"><span class="glyphicon glyphicon-plus"></span></span>
   </div></div>
   <div class="col-md-4">
-  <h4>Количество санузлов</h4>
+  <h4>РљРѕР»РёС‡РµСЃС‚РІРѕ СЃР°РЅСѓР·Р»РѕРІ</h4>
   <div class="input-group" >
    <span class="input-group-addon" style="cursor: pointer;" onclick="washer.setValue('-', 5);"><span class="glyphicon glyphicon-minus"></span></span>
     <input id="wa5" type="text" class="form-control"  style="padding-left:50%;" value="1">
@@ -68,91 +98,91 @@
   </div></div>
   <div id="outer">
   <div id="ch2" class="col-md-4" style="margin:0 auto;width:220px;"> 
-    <div style="margin-top:40px;" onclick="washer.setValue('-', 6);"><img id="wa6" src="color2.png" alt="0"  class="img-thumbnail" style="cursor: pointer;width:34px;height:34px;float:left;"><h4 style="padding-top:6px; padding-left:45px;"> После ремонта</h4></div>
+    <div style="margin-top:40px;" onclick="washer.setValue('-', 6);"><img id="wa6" src="<?php echo "http://".$_SERVER['HTTP_HOST']."/whashing/"; ?>color2.png" alt="0"  class="img-thumbnail" style="cursor: pointer;width:34px;height:34px;float:left;"><h4 style="padding-top:6px; padding-left:45px;"> РџРѕСЃР»Рµ СЂРµРјРѕРЅС‚Р°</h4></div>
   </div>
   </div>
 </div>
 <br>
 <div id="dop">
- <h4>Дополнительно<img id="arrow" src="arrow.png"  class="img-thumbnail" style="margin-left:5px;cursor: pointer;width:23px;height:19px;" onclick="washer.minimize();"></h4>
+ <h4>Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕ<img id="arrow" src="<?php echo "http://".$_SERVER['HTTP_HOST']."/whashing/"; ?>arrow.png"  class="img-thumbnail" style="margin-left:5px;cursor: pointer;width:23px;height:19px;" onclick="washer.minimize();"></h4>
  </div>
  <div id="adder">
  <div class="liner" style="margin-left:5;height:1px; width:100%; border:1px solid gray;margin-bottom:15px;"></div>
 <div id="extrablock" class="row" style="margin-left:2px;">
-  <div class="col-md-2 myblock" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Внутри<br>холодильника</p>
-  <p style="text-align:center;"><img src="img/1.png"></p>
-  <span data-tooltip="Очистка внутренних поверхностей<br>холодильников и морозильных камер" class="glyphicon glyphicon-question-sign" style="position:absolute;right:0px;"></span>
+  <div class="col-md-2 myblock" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Р’РЅСѓС‚СЂРё<br>С…РѕР»РѕРґРёР»СЊРЅРёРєР°</p>
+  <p style="text-align:center;"><img src="<?php echo "http://".$_SERVER['HTTP_HOST']."/whashing/"; ?>img/1.png"></p>
+  <span data-tooltip="РћС‡РёСЃС‚РєР° РІРЅСѓС‚СЂРµРЅРЅРёС… РїРѕРІРµСЂС…РЅРѕСЃС‚РµР№<br>С…РѕР»РѕРґРёР»СЊРЅРёРєРѕРІ Рё РјРѕСЂРѕР·РёР»СЊРЅС‹С… РєР°РјРµСЂ" class="glyphicon glyphicon-question-sign" style="position:absolute;right:0px;"></span>
   <div class="input-group" style="position:absolute;bottom:0px;">
     <span class="input-group-addon" style="cursor: pointer;" onclick="washer.setValue('-', 7);"><b>&mdash;</b></span>
     <input id="wa7" type="text" class="form-control"  style="padding-left:50%;" value="0">
     <span class="input-group-addon" style="cursor: pointer;background-color:ffeb3b;" onclick="washer.setValue('+', 7);"><b>+</b></span>
   </div></div>
-  <div class="col-md-2 myblock" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Внутри<br>духовки</p>
-  <p style="text-align:center;"><img src="img/2.png"></p>
-  <span data-tooltip="Очистка и удаление жира с внутренней<br>поверхности духового шкафа" class="glyphicon glyphicon-question-sign" style="position:absolute;right:0px;"></span>
+  <div class="col-md-2 myblock" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Р’РЅСѓС‚СЂРё<br>РґСѓС…РѕРІРєРё</p>
+  <p style="text-align:center;"><img src="<?php echo "http://".$_SERVER['HTTP_HOST']."/whashing/"; ?>img/2.png"></p>
+  <span data-tooltip="РћС‡РёСЃС‚РєР° Рё СѓРґР°Р»РµРЅРёРµ Р¶РёСЂР° СЃ РІРЅСѓС‚СЂРµРЅРЅРµР№<br>РїРѕРІРµСЂС…РЅРѕСЃС‚Рё РґСѓС…РѕРІРѕРіРѕ С€РєР°С„Р°" class="glyphicon glyphicon-question-sign" style="position:absolute;right:0px;"></span>
   <div class="input-group" style="position:absolute;bottom:0px;">
     <span class="input-group-addon" style="cursor: pointer;" onclick="washer.setValue('-', 8);"><b>&mdash;</b></span>
     <input id="wa8" type="text" class="form-control"  style="padding-left:50%;" value="0">
     <span class="input-group-addon" style="cursor: pointer;background-color:ffeb3b;" onclick="washer.setValue('+', 8);"><b>+</b></span>
   </div></div>
-  <div class="col-md-2 myblock" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Внутри<br>микроволновки</p>
-  <p style="text-align:center;"><img style="margin-top:10px;" src="img/3.png"></p>
-  <span data-tooltip="Очистка и удаление жира из<br>микроволновой печи" class="glyphicon glyphicon-question-sign" style="position:absolute;right:0px;"></span>
+  <div class="col-md-2 myblock" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Р’РЅСѓС‚СЂРё<br>РјРёРєСЂРѕРІРѕР»РЅРѕРІРєРё</p>
+  <p style="text-align:center;"><img style="margin-top:10px;" src="<?php echo "http://".$_SERVER['HTTP_HOST']."/whashing/"; ?>img/3.png"></p>
+  <span data-tooltip="РћС‡РёСЃС‚РєР° Рё СѓРґР°Р»РµРЅРёРµ Р¶РёСЂР° РёР·<br>РјРёРєСЂРѕРІРѕР»РЅРѕРІРѕР№ РїРµС‡Рё" class="glyphicon glyphicon-question-sign" style="position:absolute;right:0px;"></span>
   <div class="input-group" style="position:absolute;bottom:0px;">
     <span class="input-group-addon" style="cursor: pointer;" onclick="washer.setValue('-', 9);"><b>&mdash;</b></span>
     <input id="wa9" type="text" class="form-control"  style="padding-left:50%;" value="0">
     <span class="input-group-addon" style="cursor: pointer;background-color:ffeb3b;" onclick="washer.setValue('+', 9);"><b>+</b></span>
   </div></div>
-  <div class="col-md-2 myblock" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Помыть<br>кухонные шкафы</p>
-  <p style="text-align:center;"><img src="img/4.png"></p>
-  <span data-tooltip="Протирка и уборка в кухонных шкафах" class="glyphicon glyphicon-question-sign" style="position:absolute;right:0px;"></span>
+  <div class="col-md-2 myblock" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">РџРѕРјС‹С‚СЊ<br>РєСѓС…РѕРЅРЅС‹Рµ С€РєР°С„С‹</p>
+  <p style="text-align:center;"><img src="<?php echo "http://".$_SERVER['HTTP_HOST']."/whashing/"; ?>img/4.png"></p>
+  <span data-tooltip="РџСЂРѕС‚РёСЂРєР° Рё СѓР±РѕСЂРєР° РІ РєСѓС…РѕРЅРЅС‹С… С€РєР°С„Р°С…" class="glyphicon glyphicon-question-sign" style="position:absolute;right:0px;"></span>
   <div class="input-group" style="position:absolute;bottom:0px;">
     <span class="input-group-addon" style="cursor: pointer;" onclick="washer.setValue('-', 10);"><b>&mdash;</b></span>
     <input id="wa10" type="text" class="form-control"  style="padding-left:50%;" value="0">
     <span class="input-group-addon" style="cursor: pointer;background-color:ffeb3b;" onclick="washer.setValue('+', 10);"><b>+</b></span>
   </div></div>
-  <div class="col-md-2 myblock" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Помыть<br>чайник от накипи</p>
-  <p style="text-align:center;"><img src="img/5.png"></p>
+  <div class="col-md-2 myblock" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">РџРѕРјС‹С‚СЊ<br>С‡Р°Р№РЅРёРє РѕС‚ РЅР°РєРёРїРё</p>
+  <p style="text-align:center;"><img src="<?php echo "http://".$_SERVER['HTTP_HOST']."/whashing/"; ?>img/5.png"></p>
   <span class="glyphicon glyphicon-question-sign" style="position:absolute;right:0px;"></span>
   <div class="input-group" style="position:absolute;bottom:0px;">
     <span class="input-group-addon" style="cursor: pointer;" onclick="washer.setValue('-', 11);"><b>&mdash;</b></span>
     <input id="wa11" type="text" class="form-control"  style="padding-left:50%;" value="0">
     <span class="input-group-addon" style="cursor: pointer;background-color:ffeb3b;" onclick="washer.setValue('+', 11);"><b>+</b></span>
   </div></div>
-  <div class="col-md-2 myblock" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Помыть<br>посуду</p>
-  <p style="text-align:center;"><img src="img/6.png"></p>
+  <div class="col-md-2 myblock" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">РџРѕРјС‹С‚СЊ<br>РїРѕСЃСѓРґСѓ</p>
+  <p style="text-align:center;"><img src="<?php echo "http://".$_SERVER['HTTP_HOST']."/whashing/"; ?>img/6.png"></p>
   <span class="glyphicon glyphicon-question-sign" style="position:absolute;right:0px;"></span>
   <div class="input-group" style="position:absolute;bottom:0px;">
     <span class="input-group-addon" style="cursor: pointer;" onclick="washer.setValue('-', 12);"><b>&mdash;</b></span>
     <input id="wa12" type="text" class="form-control"  style="padding-left:50%;" value="0">
     <span class="input-group-addon" style="cursor: pointer;background-color:ffeb3b;" onclick="washer.setValue('+', 12);"><b>+</b></span>
   </div></div>
-  <div class="col-md-2 myblock" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Убраться<br>на балконе</p>
-  <p style="text-align:center;"><img src="img/7.png"></p>
-  <span data-tooltip="Протирка всех доступных поверхностей<br>на балконе, кроме окон" class="glyphicon glyphicon-question-sign" style="position:absolute;right:0px;"></span>
+  <div class="col-md-2 myblock" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">РЈР±СЂР°С‚СЊСЃСЏ<br>РЅР° Р±Р°Р»РєРѕРЅРµ</p>
+  <p style="text-align:center;"><img src="<?php echo "http://".$_SERVER['HTTP_HOST']."/whashing/"; ?>img/7.png"></p>
+  <span data-tooltip="РџСЂРѕС‚РёСЂРєР° РІСЃРµС… РґРѕСЃС‚СѓРїРЅС‹С… РїРѕРІРµСЂС…РЅРѕСЃС‚РµР№<br>РЅР° Р±Р°Р»РєРѕРЅРµ, РєСЂРѕРјРµ РѕРєРѕРЅ" class="glyphicon glyphicon-question-sign" style="position:absolute;right:0px;"></span>
   <div class="input-group" style="position:absolute;bottom:0px;">
     <span class="input-group-addon" style="cursor: pointer;" onclick="washer.setValue('-', 13);"><b>&mdash;</b></span>
     <input id="wa13" type="text" class="form-control"  style="padding-left:50%;" value="0">
     <span class="input-group-addon" style="cursor: pointer;background-color:ffeb3b;" onclick="washer.setValue('+', 13);"><b>+</b></span>
   </div></div>
-  <div class="col-md-2 myblock" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Помыть<br>комнатные шкафы</p>
-  <p style="text-align:center;"><img src="img/8.png"></p>
+  <div class="col-md-2 myblock" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">РџРѕРјС‹С‚СЊ<br>РєРѕРјРЅР°С‚РЅС‹Рµ С€РєР°С„С‹</p>
+  <p style="text-align:center;"><img src="<?php echo "http://".$_SERVER['HTTP_HOST']."/whashing/"; ?>img/8.png"></p>
   <span class="glyphicon glyphicon-question-sign" style="position:absolute;right:0px;"></span>
   <div class="input-group" style="position:absolute;bottom:0px;">
     <span class="input-group-addon" style="cursor: pointer;" onclick="washer.setValue('-', 14);"><b>&mdash;</b></span>
     <input id="wa14" type="text" class="form-control"  style="padding-left:50%;" value="0">
     <span class="input-group-addon" style="cursor: pointer;background-color:ffeb3b;" onclick="washer.setValue('+', 14);"><b>+</b></span>
   </div></div>
-  <div class="col-md-2 myblock" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Помыть<br>окна</p>
-  <p style="text-align:center;"><img src="img/9.png"></p>
-  <span data-tooltip="Мытье окон 3м&sup2; (в зимнее время с 1 ноября<br>по 31 марта только с внутренней стороны)" class="glyphicon glyphicon-question-sign" style="position:absolute;right:0px;"></span>
+  <div class="col-md-2 myblock" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">РџРѕРјС‹С‚СЊ<br>РѕРєРЅР°</p>
+  <p style="text-align:center;"><img src="<?php echo "http://".$_SERVER['HTTP_HOST']."/whashing/"; ?>img/9.png"></p>
+  <span data-tooltip="РњС‹С‚СЊРµ РѕРєРѕРЅ 3Рј&sup2; (РІ Р·РёРјРЅРµРµ РІСЂРµРјСЏ СЃ 1 РЅРѕСЏР±СЂСЏ<br>РїРѕ 31 РјР°СЂС‚Р° С‚РѕР»СЊРєРѕ СЃ РІРЅСѓС‚СЂРµРЅРЅРµР№ СЃС‚РѕСЂРѕРЅС‹)" class="glyphicon glyphicon-question-sign" style="position:absolute;right:0px;"></span>
   <div class="input-group" style="position:absolute;bottom:0px;">
     <span class="input-group-addon" style="cursor: pointer;" onclick="washer.setValue('-', 15);"><b>&mdash;</b></span>
     <input id="wa15" type="text" class="form-control"  style="padding-left:50%;" value="0">
     <span class="input-group-addon" style="cursor: pointer;background-color:ffeb3b;" onclick="washer.setValue('+', 15);"><b>+</b></span>
   </div></div>
-  <div class="col-md-2 myblock" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Помыть<br>зеркала</p>
-  <p style="text-align:center;"><img src="img/10.png"></p>
+  <div class="col-md-2 myblock" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">РџРѕРјС‹С‚СЊ<br>Р·РµСЂРєР°Р»Р°</p>
+  <p style="text-align:center;"><img src="<?php echo "http://".$_SERVER['HTTP_HOST']."/whashing/"; ?>img/10.png"></p>
   <span class="glyphicon glyphicon-question-sign" style="position:absolute;right:0px;"></span><div class="input-group" style="position:absolute;bottom:0px;">
     <span class="input-group-addon" style="cursor: pointer;" onclick="washer.setValue('-', 16);"><b>&mdash;</b></span>
     <input id="wa16" type="text" class="form-control"  style="padding-left:50%;" value="0">
@@ -166,26 +196,26 @@
 <div class="row" style="">
 <div class="col-md-2">
 <div class="control-group error">
-  <h4>Ваше имя<span style="color:red;">*</span></h4>
-  <input type="text" class="form-control" id="usrName" placeholder="Иван" maxlength="20">
+  <h4>Р’Р°С€Рµ РёРјСЏ<span style="color:red;">*</span></h4>
+  <input type="text" class="form-control" id="usrName" placeholder="РРІР°РЅ" maxlength="20">
 </div>
 </div>
 <div class="col-md-3">
 <div class="form-group">
-  <h4>Ваш контактный телефон<span style="color:red;">*</span></h4>
+  <h4>Р’Р°С€ РєРѕРЅС‚Р°РєС‚РЅС‹Р№ С‚РµР»РµС„РѕРЅ<span style="color:red;">*</span></h4>
   <input type="text" class="form-control" id="usrPhone" placeholder="+7 123 4567890">
 </div>
 </div>
 <div class="col-md-3" style="margin-top:7px;">
 <div style="margin:0 auto;width:305px;height:60px;background-color:#ffeb3b;border-radius:4px;cursor:pointer;" onclick="washer.calc();">
-<h2 style="text-align:center;padding-top:15px;white-space: nowrap;"><b>Узнать стоимость</b></h2>
+<h2 style="text-align:center;padding-top:15px;white-space: nowrap;"><b>РЈР·РЅР°С‚СЊ СЃС‚РѕРёРјРѕСЃС‚СЊ</b></h2>
 </div>
 </div>
 </div>
 
 <div class="row" style="margin-left:10px;">
 <div class="col-md-2" style="margin:0 auto;margin-top:16px;width:250px;">
-<h3>Стоимость уборки:</h3>
+<h3>РЎС‚РѕРёРјРѕСЃС‚СЊ СѓР±РѕСЂРєРё:</h3>
 </div>
 <div class="col-md-2" style="margin:0 auto;margin-top:7px;width:250px;">
 <h1 id="price"><b>&#8381;</b></h1>
@@ -240,7 +270,17 @@ washer = {
 	prices:
 	{
 		totalCost:0,
-		sanUzel:540,
+		<?php
+		$db = new SafeMySQL();
+$data = mysqli_fetch_assoc($db->query("SELECT * FROM sw_cprices"));
+
+foreach ($elements as $key => $value)
+{
+
+	echo $key.":".$data[$key].",";
+}
+		?>
+		/*sanUzel:540,
 		prihojaya:450,
 		room:450,
 		S:51,
@@ -255,7 +295,7 @@ washer = {
 		cleanBalcony:540,
 		washRoomsCabinet:300,
 		washWindows:400,
-		washMirrors:100
+		washMirrors:100*/
 	},
 	priznak:true,
 	innerhtml:null,
@@ -268,12 +308,12 @@ washer = {
 			if (this.priznak)
 			{
 				this.priznak=false;
-				document.getElementById("arrow").setAttribute("src", "arrow2.png");
+				document.getElementById("arrow").setAttribute("src", "<?php echo "http://".$_SERVER['HTTP_HOST']."/whashing/"; ?>arrow2.png");
 			}
 			else
 			{
 				this.priznak=true;
-				document.getElementById("arrow").setAttribute("src", "arrow.png");
+				document.getElementById("arrow").setAttribute("src", "<?php echo "http://".$_SERVER['HTTP_HOST']."/whashing/"; ?>arrow.png");
 			}
 
 	},
@@ -398,16 +438,16 @@ washer = {
 				if (document.getElementById("wa3").alt == "1")
 					{
 						document.getElementById("wa3").setAttribute("alt", "0");
-						document.getElementById("wa3").setAttribute("src", "color2.png");
+						document.getElementById("wa3").setAttribute("src", "<?php echo "http://".$_SERVER['HTTP_HOST']."/whashing/"; ?>color2.png");
 						document.getElementById("wa6").setAttribute("alt", "0");
-						document.getElementById("wa6").setAttribute("src", "color2.png");
+						document.getElementById("wa6").setAttribute("src", "<?php echo "http://".$_SERVER['HTTP_HOST']."/whashing/"; ?>color2.png");
 					}
 				else
 					{
 						document.getElementById("wa3").setAttribute("alt", "1");
-						document.getElementById("wa3").setAttribute("src", "color.png");
+						document.getElementById("wa3").setAttribute("src", "<?php echo "http://".$_SERVER['HTTP_HOST']."/whashing/"; ?>color.png");
 						document.getElementById("wa6").setAttribute("alt", "0");
-						document.getElementById("wa6").setAttribute("src", "color2.png");
+						document.getElementById("wa6").setAttribute("src", "<?php echo "http://".$_SERVER['HTTP_HOST']."/whashing/"; ?>color2.png");
 					}
 			break;
 			
@@ -472,16 +512,16 @@ washer = {
 					if (document.getElementById("wa6").alt == "1")
 					{
 						document.getElementById("wa6").setAttribute("alt", "0");
-						document.getElementById("wa6").setAttribute("src", "color2.png");
+						document.getElementById("wa6").setAttribute("src", "<?php echo "http://".$_SERVER['HTTP_HOST']."/whashing/"; ?>color2.png");
 						document.getElementById("wa3").setAttribute("alt", "0");
 						document.getElementById("wa3").setAttribute("src", "color2.png");
 					}
 				else
 					{
 						document.getElementById("wa6").setAttribute("alt", "1");
-						document.getElementById("wa6").setAttribute("src", "color.png");
+						document.getElementById("wa6").setAttribute("src", "<?php echo "http://".$_SERVER['HTTP_HOST']."/whashing/"; ?>color.png");
 						document.getElementById("wa3").setAttribute("alt", "0");
-						document.getElementById("wa3").setAttribute("src", "color2.png");
+						document.getElementById("wa3").setAttribute("src", "<?php echo "http://".$_SERVER['HTTP_HOST']."/whashing/"; ?>color2.png");
 					}
 			break;
 		}
@@ -491,29 +531,29 @@ washer = {
 	{
 		priznak =true;
 		Usrname = true;
-		msg="Внимание:\n";
-		if ((/^[а-яА-Я]+$/).test(document.getElementById("usrName").value) == false && document.getElementById("usrName").value != "")
+		msg="Р’РЅРёРјР°РЅРёРµ:\n";
+		if ((/^[Р°-СЏРђ-РЇ]+$/).test(document.getElementById("usrName").value) == false && document.getElementById("usrName").value != "")
 			{
 				Usrname = false;
 				priznak = false;
-				msg +="Вы ввели не коректное имя\n";
+				msg +="Р’С‹ РІРІРµР»Рё РЅРµ РєРѕСЂРµРєС‚РЅРѕРµ РёРјСЏ\n";
 			}
 		if (document.getElementById("usrName").value == "")
 		{
 			 
 			Usrname = false;
-			document.getElementById("usrName").setAttribute("data-tooltip", "Что бы расчитать стоимость уборки<br>введите ваше имя");
+			document.getElementById("usrName").setAttribute("data-tooltip", "Р§С‚Рѕ Р±С‹ СЂР°СЃС‡РёС‚Р°С‚СЊ СЃС‚РѕРёРјРѕСЃС‚СЊ СѓР±РѕСЂРєРё<br>РІРІРµРґРёС‚Рµ РІР°С€Рµ РёРјСЏ");
 			
 
 				priznak = false;
-				msg +="Вы не указали имя\n";
+				msg +="Р’С‹ РЅРµ СѓРєР°Р·Р°Р»Рё РёРјСЏ\n";
 		}
 		
 		if (document.getElementById("usrPhone").value == "")
 		{
-				document.getElementById("usrPhone").setAttribute("data-tooltip", "Что бы расчитать стоимость уборки<br>введите ваш контактный телефон");
+				document.getElementById("usrPhone").setAttribute("data-tooltip", "Р§С‚Рѕ Р±С‹ СЂР°СЃС‡РёС‚Р°С‚СЊ СЃС‚РѕРёРјРѕСЃС‚СЊ СѓР±РѕСЂРєРё<br>РІРІРµРґРёС‚Рµ РІР°С€ РєРѕРЅС‚Р°РєС‚РЅС‹Р№ С‚РµР»РµС„РѕРЅ");
 				priznak = false;
-				msg +="Вы не указали телефон\n";
+				msg +="Р’С‹ РЅРµ СѓРєР°Р·Р°Р»Рё С‚РµР»РµС„РѕРЅ\n";
 
 		}
 		
@@ -594,10 +634,10 @@ washer = {
       var coords = target.getBoundingClientRect();
 
       var left = coords.left +20;
-      if (left < 0) left = 0; // не вылезать за левую границу окна
+      if (left < 0) left = 0; // РЅРµ РІС‹Р»РµР·Р°С‚СЊ Р·Р° Р»РµРІСѓСЋ РіСЂР°РЅРёС†Сѓ РѕРєРЅР°
 
       var top = coords.top - tooltipElem.offsetHeight + 30;
-      if (top < 0) { // не вылезать за верхнюю границу окна
+      if (top < 0) { // РЅРµ РІС‹Р»РµР·Р°С‚СЊ Р·Р° РІРµСЂС…РЅСЋСЋ РіСЂР°РЅРёС†Сѓ РѕРєРЅР°
         top = coords.top + target.offsetHeight + 5;
       }
 
