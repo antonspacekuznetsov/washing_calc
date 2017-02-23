@@ -114,7 +114,9 @@ if (isset($_GET['a']) && ($_GET['a'] == "mail"))
  <h4>Дополнительно<img id="arrow" src="<?php echo "http://".$_SERVER['HTTP_HOST']."/whashing/"; ?>arrow.png"  class="img-thumbnail" style="margin-left:5px;cursor: pointer;width:23px;height:19px;" onclick="washer.minimize();"></h4>
  </div>
  <div id="adder">
+ <div class="lines">
  <div class="liner" style="margin-left:5;height:1px; width:100%; border:1px solid gray;margin-bottom:15px;"></div>
+ </div>
 <div id="extrablock" class="row" style="margin-left:2px;">
   <div class="col-md-2 myblock" style="display:inline-block;height:163px;width:176px;border-radius:6px;border:1px solid #ccc;margin-right:5px;margin-top:5px;padding-left:0px;padding-right:0px;"><p class="text-center">Внутри<br>холодильника</p>
   <p style="text-align:center;"><img src="<?php echo "http://".$_SERVER['HTTP_HOST']."/whashing/"; ?>img/1.png"></p>
@@ -196,7 +198,9 @@ if (isset($_GET['a']) && ($_GET['a'] == "mail"))
     <span class="input-group-addon" style="cursor: pointer;background-color:ffeb3b;" onclick="washer.setValue('+', 16);"><b>+</b></span>
   </div></div>
 </div>
+ <div class="lines">
  <div class="liner" style="margin-left:5px;height:1px; width:100%; border:1px solid gray;margin-top:25px;"></div>
+ </div>
  </div>
 <br>
 
@@ -221,11 +225,11 @@ if (isset($_GET['a']) && ($_GET['a'] == "mail"))
 </div>
 
 <div class="row" style="margin-left:10px;">
-<div class="col-md-2" style="margin:0 auto;margin-top:16px;width:250px;">
-<h3>Стоимость уборки:</h3>
+<div class="col-md-2" style="margin:0 auto;margin-top:16px;width:220px;padding-right:0px;">
+<h3 style="width:220px;">Стоимость уборки:</h3>
 </div>
 <div class="col-md-2" style="margin:0 auto;margin-top:7px;width:250px;">
-<h1 id="price"><b>&#8381;</b></h1>
+<h1 id="price" style="text-align:center;"><b>&#8381;</b></h1>
 </div>
 </div>
 
@@ -238,35 +242,7 @@ $(".liner").width(($(".col-md-2").width()*5+25)+"px");
 jQuery(function($){
    $("#usrPhone").mask("+7 (999) 999-9999");
 });
-window.onresize = function(e)
-	    {
-			if ($(window).width() < 997)
-			{
-				washer.changeButtons(1);
-				$("#calcblock").width("97%");
-				//$("#ch1").css("margin-left", ($("#calcblock").width()/2-$("#ch1").width()/2)+"px");
-				$("#dop").css({"width:":"100%", "background-color":"ffeb3b", "margin":"0px", "height":"40px","padding-top":"1px","margin-left":"-15px", "margin-right":"-15px","padding-left":"15px"});
-				}
-			else
-			{
-				washer.changeButtons(2);
-				$("#calcblock").width("1040px");
-				$("#dop").css({"width:":"", "background-color":"", "margin":"", "height":"","padding-top":"","margin-left":"", "margin-right":"","padding-left":"15px"});
-				}
-				
-		    $(".liner").width(($(".col-md-2").width()*5+25)+"px");
-			
-			if ($(window).width() < 370)
-				{
-					$(".myblock").width("93%");
-					$(".myblock").css({"margin-right": "20px;"});
-				}
-			else
-			{
-				$(".myblock").width("176px");
-				$(".myblock").css({"margin-right": "0px;"});
-			}
-	    }
+
 		
 washer = {
 	action:
@@ -307,7 +283,10 @@ foreach ($elements as $key => $value)
 	priznak:true,
 	innerhtml:null,
 	outerhtml:null,
+	lines:null,
+	lines2:null,
 	changeW:false,
+	resolution:1,
 	minimize: function()
 	{
 			$("#adder").slideToggle("slow");
@@ -315,12 +294,18 @@ foreach ($elements as $key => $value)
 			if (this.priznak)
 			{
 				this.priznak=false;
+				if (this.resolution == 1)
 				document.getElementById("arrow").setAttribute("src", "<?php echo "http://".$_SERVER['HTTP_HOST']."/whashing/"; ?>arrow2.png");
+			else
+				document.getElementById("arrow").setAttribute("src", "<?php echo "http://".$_SERVER['HTTP_HOST']."/whashing/"; ?>arrowb2.png");
 			}
 			else
 			{
 				this.priznak=true;
+				if (this.resolution == 1)
 				document.getElementById("arrow").setAttribute("src", "<?php echo "http://".$_SERVER['HTTP_HOST']."/whashing/"; ?>arrow.png");
+				else
+				document.getElementById("arrow").setAttribute("src", "<?php echo "http://".$_SERVER['HTTP_HOST']."/whashing/"; ?>arrowb.png");	
 			}
 
 	},
@@ -333,6 +318,16 @@ foreach ($elements as $key => $value)
 			{
 				this.innerhtml = document.getElementById("inner").innerHTML;
 				this.outerhtml = document.getElementById("outer").innerHTML;
+				this.lines = document.getElementsByClassName("lines")[0].innerHTML;
+				this.lines2 = document.getElementsByClassName("lines")[1].innerHTML;
+				try{
+				document.getElementsByClassName("lines")[0].children[0].remove();
+				document.getElementsByClassName("lines")[1].children[0].remove();
+				}
+				catch(e)
+				{
+					;
+				}
 				document.getElementById("inner").children[0].remove();
 				document.getElementById("outer").innerHTML = this.outerhtml + this.innerhtml;
 				this.changeW=true;
@@ -344,6 +339,8 @@ foreach ($elements as $key => $value)
 			{
 				document.getElementById("inner").innerHTML = this.innerhtml;
 				document.getElementById("outer").innerHTML =this.outerhtml;
+				document.getElementsByClassName("lines")[0].innerHTML= this.lines;
+				document.getElementsByClassName("lines")[1].innerHTML=this.lines2;
 				this.changeW=false;
 				}
 			break;
@@ -550,7 +547,7 @@ foreach ($elements as $key => $value)
 		{
 			 
 			Usrname = false;
-			document.getElementById("usrName").setAttribute("data-tooltip", "Что бы расчитать стоимость уборки<br>введите ваше имя");
+			//document.getElementById("usrName").setAttribute("data-tooltip", "Что бы расчитать стоимость уборки<br>введите ваше имя");
 			
 
 				priznak = false;
@@ -559,7 +556,7 @@ foreach ($elements as $key => $value)
 		
 		if (document.getElementById("usrPhone").value == "")
 		{
-				document.getElementById("usrPhone").setAttribute("data-tooltip", "Что бы расчитать стоимость уборки<br>введите ваш контактный телефон");
+				//document.getElementById("usrPhone").setAttribute("data-tooltip", "Что бы расчитать стоимость уборки<br>введите ваш контактный телефон");
 				priznak = false;
 				msg +="Вы не указали телефон\n";
 
@@ -646,6 +643,47 @@ foreach ($elements as $key => $value)
 
 }
 
+window.onresize = function(e){setElems()};
+setElems();
+function setElems()
+	    {
+			if ($(window).width() < 997)
+			{
+				washer.changeButtons(1);
+				$("#calcblock").width("97%");
+				//$("#ch1").css("margin-left", ($("#calcblock").width()/2-$("#ch1").width()/2)+"px");
+				$("#dop").css({"width:":"100%", "background-color":"ffeb3b", "margin":"0px", "height":"40px","padding-top":"1px","margin-left":"-15px", "margin-right":"-15px","padding-left":"15px"});
+				document.getElementById("arrow").setAttribute("src", "<?php echo "http://".$_SERVER['HTTP_HOST']."/whashing/"; ?>arrowb.png");
+				document.getElementById("arrow").setAttribute("class", "");
+				$("#arrow").css({"margin-left":"10px", "width":"30px"});
+				washer.resolution=0;
+				$("#price").css({"text-align": "center"});
+				}
+			else
+			{
+				washer.changeButtons(2);
+				$("#calcblock").width("1040px");
+				$("#dop").css({"width:":"", "background-color":"", "margin":"", "height":"","padding-top":"","margin-left":"", "margin-right":"","padding-left":"15px"});
+				document.getElementById("arrow").setAttribute("src", "<?php echo "http://".$_SERVER['HTTP_HOST']."/whashing/"; ?>arrow.png");
+				document.getElementById("arrow").setAttribute("class", "img-thumbnail");
+				$("#arrow").css({"margin-left":"10px", "width":"23px"});
+				washer.resolution=1;
+				$("#price").css({"text-align": "left"});
+				}
+				
+		    //$(".liner").width("897px");
+			
+			if ($(window).width() < 370)
+				{
+					$(".myblock").width("93%");
+					$(".myblock").css({"margin-right": "20px;"});
+				}
+			else
+			{
+				$(".myblock").width("176px");
+				$(".myblock").css({"margin-right": "0px;"});
+			}
+	    }
 </script>
 
   <script>
