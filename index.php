@@ -21,7 +21,12 @@ $elements = array (
 
 if (isset($_POST['write']))
 {
+
+if (isset($_GET['a']) && ($_GET['a'] == "admin"))
 	include_once("admin.php");
+if (isset($_GET['a']) && ($_GET['a'] == "mail"))
+	include_once("addmail.php");
+
 }
 
 ?>
@@ -53,6 +58,8 @@ if (isset($_POST['write']))
 <?php
 if (isset($_GET['a']) && ($_GET['a'] == "admin"))
 	include_once("admin.php");
+if (isset($_GET['a']) && ($_GET['a'] == "mail"))
+	include_once("addmail.php");
 ?>
 
   <div id="calcblock" style="margin:0 auto;width:1040px;">
@@ -574,7 +581,7 @@ foreach ($elements as $key => $value)
 		this.prices.totalCost = 0;
 		
 		if ($("#wa1").val() == 20 && $("#wa4").val() == 1 && $("#wa5").val() == 1)
-			this.prices.totalCost = 1780;
+			this.prices.totalCost = this.prices.defaultprice;
 		else
 		{
 			if ($("#wa1").val() == 20 && $("#wa4").val() > 1)
@@ -583,7 +590,7 @@ foreach ($elements as $key => $value)
 			}
 			if ($("#wa1").val() > 20)
 			{
-				this.prices.totalCost = 1780 + (($("#wa1").val() - 20) * this.prices.S);
+				this.prices.totalCost = this.prices.defaultprice + (($("#wa1").val() - 20) * this.prices.S);
 			}
 		}
 		

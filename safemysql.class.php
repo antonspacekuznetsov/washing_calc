@@ -65,7 +65,7 @@
  * $data = $db->getAll("SELECT * FROM table WHERE ?p", $bar, $sqlpart);
  * 
  */
-include_once($_SERVER['DOCUMENT_ROOT']."/wp-config.php");
+//include_once($_SERVER['DOCUMENT_ROOT']."/wp-config.php");
 class SafeMySQL
 {
 
@@ -75,10 +75,10 @@ class SafeMySQL
 	private $exname;
 
 	private $defaults = array(
-		'host'      => DB_HOST,
-		'user'      => DB_USER,
-		'pass'      => DB_PASSWORD,
-		'db'        => DB_NAME,
+		'host'      => 'localhost',
+		'user'      => 'root',
+		'pass'      => '',
+		'db'        => 'washing',
 		'port'      => NULL,
 		'socket'    => NULL,
 		'pconnect'  => FALSE,

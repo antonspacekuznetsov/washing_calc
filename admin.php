@@ -1,5 +1,3 @@
-<div style="height:30px;">
-</div>
 <?php
 
 if (isset($_POST['write']))
@@ -22,7 +20,7 @@ if (isset($_POST['write']))
 $count=1;
 $db = new SafeMySQL();
 $data = mysqli_fetch_assoc($db->query("SELECT * FROM sw_cprices"));
-
+echo '<div style="height:30px;"></div>';
 foreach ($elements as $key => $value)
 {
 	echo '<div style="padding-left:20px;width:60%;" class="input-group input-group-sm">';
@@ -47,7 +45,7 @@ echo "if (fields !== '') {if (!confirm('ВНИМАНИЕ!\\nСледующие �
 echo "
 var dta = '".$data."write=1"."';
 $.ajax({ type: \"POST\",
-  url: \"".$_SERVER['PHP_SELF']."?a=".$tab."&b=".$subtab."\",
+  url: \"".$_SERVER['PHP_SELF']."?a=admin\",
   data: dta,
     success: function(msg){
 		if (msg == \"OK\")
@@ -65,5 +63,7 @@ foreach ($elements as $key => $value)
 echo "}";
 
 echo "</script>";
+
+include_once ('addmail.php');
 exit();
 ?>
