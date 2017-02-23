@@ -536,6 +536,7 @@ foreach ($elements as $key => $value)
 	
 	calc: function()
 	{
+		var message="";
 		priznak =true;
 		Usrname = true;
 		msg="Внимание:\n";
@@ -581,42 +582,66 @@ foreach ($elements as $key => $value)
 		this.prices.totalCost = 0;
 		
 		if ($("#wa1").val() == 20 && $("#wa4").val() == 1 && $("#wa5").val() == 1)
+		{
 			this.prices.totalCost = this.prices.defaultprice;
+			message = "<table><tr><td>Общая площадь</td><td>20</td><td></td></tr><tr><td>Количество комнат</td><td>1</td><td></td></tr><tr><td>Количество санузлов</td><td>1</td><td></td></tr>";
+		}
 		else
 		{
 			if ($("#wa1").val() == 20 && $("#wa4").val() > 1)
 			{
 				this.prices.totalCost = $("#wa4").val() * 35 * this.prices.S;
+				message = "<table><tr><td>Общая площадь</td><td>20</td><td></td></tr><tr><td>Количество комнат</td><td>"+$("#wa4").val()+"</td><td>"+this.prices.totalCost+"</td></tr>";
 			}
 			if ($("#wa1").val() > 20)
 			{
 				this.prices.totalCost = this.prices.defaultprice + (($("#wa1").val() - 20) * this.prices.S);
+				message = "<table><tr><td>Общая площадь</td><td>"+$("#wa1").val()+"</td><td>"+this.prices.totalCost+"</td></tr>";
 			}
 		}
 		
 		if ($("#wa2").val() == 1)
 		{
 			this.prices.totalCost += this.prices.prihojaya;
+			message += "<tr><td>Количество прихожих</td><td>"+$("#wa2").val()+"</td><td>"+this.prices.prihojaya+"</td></tr>";
 		}
 		
 		if (document.getElementById("wa3").alt == "1" || document.getElementById("wa6").alt == "1")
 		{
 			this.prices.totalCost += this.prices.radioButton;
+			message += "<tr><td>Генеральная</td><td></td><td>"+this.prices.radioButton+"</td></tr>";
 		}
 		
 
 			this.prices.totalCost += $("#wa7").val() * this.prices.inFridge;
+			message += "<tr><td>Внутри холодильника</td>"+$("#wa7").val()+"<td></td><td>"+($("#wa7").val() * this.prices.inFridge)+"</td></tr>";
 			this.prices.totalCost += $("#wa8").val() * this.prices.inOven;
+			message += "<tr><td>Внутри духовки</td>"+$("#wa8").val()+"<td></td><td>"+($("#wa8").val() * this.prices.inOven)+"</td></tr>";
 			this.prices.totalCost += $("#wa9").val() * this.prices.inMicrowave;
+			message += "<tr><td>Внутри микроволновки</td>"+$("#wa9").val()+"<td></td><td>"+($("#wa9").val() * this.prices.inMicrowave)+"</td></tr>";
 			this.prices.totalCost += $("#wa10").val() * this.prices.washKitchenCabinet;
+			message += "<tr><td>Помыть кухонные шкафы</td>"+$("#wa10").val()+"<td></td><td>"+($("#wa10").val() * this.prices.washKitchenCabinet)+"</td></tr>";
 			this.prices.totalCost += $("#wa11").val() * this.prices.washKettle;
+			message += "<tr><td>Помыть чайник от накипи</td>"+$("#wa11").val()+"<td></td><td>"+($("#wa11").val() * this.prices.washKettle)+"</td></tr>";
 			this.prices.totalCost += $("#wa12").val() * this.prices.washDishes;
+			message += "<tr><td>Помыть посуду</td>"+$("#wa12").val()+"<td></td><td>"+($("#wa12").val() * this.prices.washDishes)+"</td></tr>";
 			this.prices.totalCost += $("#wa13").val() * this.prices.cleanBalcony;
+			message += "<tr><td>Убраться на балконе</td>"+$("#wa13").val()+"<td></td><td>"+ ($("#wa13").val() * this.prices.cleanBalcony)+"</td></tr>";
 			this.prices.totalCost += $("#wa14").val() * this.prices.washRoomsCabinet;
+			message += "<tr><td>Помыть комнатные шкафы</td>"+$("#wa14").val()+"<td></td><td>"+($("#wa14").val() * this.prices.washRoomsCabinet)+"</td></tr>";
 			this.prices.totalCost += $("#wa15").val() * this.prices.washWindows;
+			message += "<tr><td>Помыть окна</td>"+$("#wa15").val()+"<td></td><td>"+($("#wa15").val() * this.prices.washWindows)+"</td></tr>";
 			this.prices.totalCost += $("#wa16").val() * this.prices.washMirrors;	
-
+			message += "<tr><td>Помыть зеркала</td>"+$("#wa16").val()+"<td></td><td>"+($("#wa16").val() * this.prices.washMirrors)+"</td></tr></table>";
+			message+="<h2>Контакты:<br> Имя: " + $("#usrName").val() + "<br>Контактный телефон: " + $("#usrPhone").val() +"</h2>";
 			document.getElementById("price").innerHTML = "<b>"+this.prices.totalCost+"&#8381;</b>";
+			message+="<h2>Ощая сумма рачета:" + this.prices.totalCost+"</h2>";
+			
+			$.ajax({ 
+				type: "POST",
+			  url: "mailer.php",
+			  data: "ergdf3=1&msg=" + encodeURIComponent(message)
+			});
 	}
 
 }

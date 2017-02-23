@@ -1,4 +1,6 @@
 ﻿<?php
+if (!isset($_POST['ergdf3']))
+	exit();
 require ('vendor/autoload.php');
 include_once ('safemysql.class.php');
 
@@ -26,13 +28,9 @@ while ($data = mysqli_fetch_assoc($result))
 $mail->isHTML(true);                                  // Set email format to HTML
 
 $mail->Subject = 'Новая заявка с сайта';
-$mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+$mail->Body    = $_POST['msg'];
 
-if(!$mail->send()) {
-    echo 'Message could not be sent.';
-    echo 'Mailer Error: ' . $mail->ErrorInfo;
-} else {
-    echo 'Message has been sent';
-}
+$mail->send();
+echo "ok";
+
 ?>
