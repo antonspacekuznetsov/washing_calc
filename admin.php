@@ -64,6 +64,5 @@ echo "}";
 
 echo "</script>";
 
-include_once ('addmail.php');
 exit();
 ?>

@@ -57,9 +57,22 @@ if (isset($_GET['a']) && ($_GET['a'] == "mail"))
 <body>
 <?php
 if (isset($_GET['a']) && ($_GET['a'] == "admin"))
+{
+	echo '	<ul class="nav nav-tabs">
+  <li><a href="index.php?a=admin">Цены</a></li>
+  <li><a href="index.php?a=mail">Почтовые ящики</a></li>
+</ul>';
+
 	include_once("admin.php");
+}
 if (isset($_GET['a']) && ($_GET['a'] == "mail"))
+{
+	echo '	<ul class="nav nav-tabs">
+  <li><a href="index.php?a=admin">Цены</a></li>
+  <li><a href="index.php?a=mail">Почтовые ящики</a></li>
+</ul>';
 	include_once("addmail.php");
+}
 ?>
 
   <div id="calcblock" style="margin:0 auto;width:1040px;">
@@ -206,15 +219,17 @@ if (isset($_GET['a']) && ($_GET['a'] == "mail"))
 
 <div class="row" style="">
 <div class="col-md-2">
-<div class="control-group error">
+<div class="control-group">
   <h4>Ваше имя<span style="color:red;">*</span></h4>
   <input type="text" class="form-control" id="usrName" placeholder="Иван" maxlength="20">
+  <span class="error" style="color:red;"></span>
 </div>
 </div>
 <div class="col-md-3">
 <div class="form-group">
   <h4>Ваш контактный телефон<span style="color:red;">*</span></h4>
   <input type="text" class="form-control" id="usrPhone" placeholder="+7 123 4567890">
+  <span class="error" style="color:red;"></span>
 </div>
 </div>
 <div class="col-md-3" style="margin-top:7px;">
@@ -541,7 +556,7 @@ foreach ($elements as $key => $value)
 			{
 				Usrname = false;
 				priznak = false;
-				msg +="Вы ввели не коректное имя\n";
+				document.getElementsByClassName("error")[0].innerText="Только символы кириллицы.";
 			}
 		if (document.getElementById("usrName").value == "")
 		{
@@ -552,6 +567,7 @@ foreach ($elements as $key => $value)
 
 				priznak = false;
 				msg +="Вы не указали имя\n";
+				document.getElementsByClassName("error")[0].innerText="Поле обязательно.";
 		}
 		
 		if (document.getElementById("usrPhone").value == "")
@@ -559,12 +575,12 @@ foreach ($elements as $key => $value)
 				//document.getElementById("usrPhone").setAttribute("data-tooltip", "Что бы расчитать стоимость уборки<br>введите ваш контактный телефон");
 				priznak = false;
 				msg +="Вы не указали телефон\n";
+				document.getElementsByClassName("error")[1].innerText="Поле обязательно.";
 
 		}
 		
 		if(!priznak)
 		{
-			alert(msg);
 				if (!Usrname)
 				{
 					document.getElementById("usrName").focus();
@@ -575,7 +591,8 @@ foreach ($elements as $key => $value)
 					}
 			return;
 		}
-		
+		document.getElementsByClassName("error")[0].innerText="";
+		document.getElementsByClassName("error")[1].innerText="";
 		this.prices.totalCost = 0;
 		
 		if ($("#wa1").val() == 20 && $("#wa4").val() == 1 && $("#wa5").val() == 1)
@@ -673,9 +690,9 @@ function setElems()
 				
 		    //$(".liner").width("897px");
 			
-			if ($(window).width() < 370)
+			if ($(window).width() < 545)
 				{
-					$(".myblock").width("93%");
+					$(".myblock").width("45%");
 					$(".myblock").css({"margin-right": "20px;"});
 				}
 			else
@@ -683,6 +700,7 @@ function setElems()
 				$(".myblock").width("176px");
 				$(".myblock").css({"margin-right": "0px;"});
 			}
+
 	    }
 </script>
 
