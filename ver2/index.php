@@ -778,7 +778,7 @@ foreach ($elements as $key => $value)
 		{
 			if ($("#wa1").val() == 20 && $("#wa4").val() > 1)
 			{
-				this.prices.totalCost = this.prices.defaultprice +  ($("#wa4").val() - 1) * this.prices.room;
+				this.prices.totalCost = $("#wa4").val() * this.prices.room;
 				//message = "<table><tr><td>Общая площадь</td><td>20</td><td></td></tr><tr><td>Количество комнат</td><td>"+$("#wa4").val()+"</td><td>"+this.prices.totalCost+"</td></tr>";
 			}
 			if ($("#wa1").val() > 20)
